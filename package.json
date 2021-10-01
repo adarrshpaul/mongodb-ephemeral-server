@@ -1,0 +1,23 @@
+{
+  "name": "mongodb-inmemory-instance-fortesting",
+  "version": "1.0.0",
+  "description": "This is a library which instantiates an inmemory instance",
+  "main": "automation.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node ./index.ts"
+  },
+  "keywords": [
+    "test",
+    "mongodb"
+  ],
+  "author": "adarrsh_paul",
+  "license": "MIT",
+  "devDependencies": {
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
+  },
+  "dependencies": {
+    "ts-node": "^10.2.1"
+  }
+}
