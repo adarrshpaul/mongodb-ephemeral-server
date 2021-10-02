@@ -53,8 +53,17 @@ class mongoInstance {
     public static end() {
         this.mongoProcess.kill('SIGINT');
     }
+
+    public static getDbUri () {
+        let url = `mongodb://localhost:${this.port}/`;
+        return url;
+    }
 }
 
-module.exports = {mongoInstance}
+let dbUrl = mongoInstance.getDbUri();
+console.log(dbUrl);
+
+
+export default mongoInstance;
 
 
