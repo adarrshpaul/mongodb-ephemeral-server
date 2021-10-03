@@ -1,39 +1,34 @@
 import * as process from "child_process";
+class mongoInstance  {
+    public port: number;
+    public logPath: string;
+    public dbPath: string;
 
-class mongoInstance {
-    private static port: number = 27022;
-    private static logPath: string = '/home/adarrsh/databases/mongodb/log/mongod.log';
-    private static dbPath: string = '/home/adarrsh/databases/mongodb/data';
+    public constructor(port:number, logPath: string, dbPath: string) {
+        this.port = port;
+        this.logPath = logPath;
+        this.dbPath = dbPath;
+    };
 
-    private static instance: mongoInstance;
-    /***Private constructor so that no one can create an instance directly */
-    private constructor() { };
+    private mongoProcess: any;
 
-    private static mongoProcess: any;
-
-    public static getInstance(): mongoInstance {
-        if (!mongoInstance.instance) {
-            mongoInstance.instance = new mongoInstance();
-        }
-        return mongoInstance.instance;
-    }
-
-    public static start() {
+    public start(): void {
         let engine = 'ephemeralForTest';
         this.mongoProcess = process.spawn('mongod', [`--port=${this.port}`, `--dbpath=${this.dbPath}`, `--logpath=${this.logPath}`, '--nojournal', `--storageEngine=${engine}`, `--quiet`]);
+
         this.mongoProcess.on('error', function (err: any) {
-            console.log('err: ',err);
+            console.log('err: ', err);
             throw new TypeError(err);
         });
 
         this.mongoProcess.on('close', function (code: any) {
-            if(code !== 0){
+            if (code !== 0) {
                 throw new TypeError('Refer the log file for more info !' + code)
             }
         });
     }
 
-    public static debug() {
+    public debug():void {
         this.mongoProcess.stdout.on('data', function (data: any) {
             console.log('stdout: ' + data);
         });
@@ -42,7 +37,7 @@ class mongoInstance {
         });
 
         this.mongoProcess.on('error', function (err: any) {
-            console.log('err: ',err);
+            console.log('err: ', err);
         });
 
         this.mongoProcess.on('close', function (code: any) {
@@ -50,20 +45,17 @@ class mongoInstance {
         });
     }
 
-    public static end() {
+    public stop():void {
         this.mongoProcess.kill('SIGINT');
     }
 
-    public static getDbUri () {
-        let url = `mongodb://localhost:${this.port}/`;
+    public getDbUri(dbName: string): string {
+        let url = `mongodb://localhost:${this.port}/${dbName}`;
         return url;
     }
 }
 
-let dbUrl = mongoInstance.getDbUri();
-console.log(dbUrl);
 
-
-export default mongoInstance;
+export { mongoInstance }
 
 
