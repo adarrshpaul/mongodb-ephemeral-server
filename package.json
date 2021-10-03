@@ -20,7 +20,6 @@
     "typescript": "^3.3.3"
   },
   "dependencies": {
-    "np": "^7.5.0",
     "ts-node": "^10.2.1"
   }
 }
