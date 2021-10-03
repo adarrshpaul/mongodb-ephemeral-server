@@ -1,11 +1,13 @@
 {
   "name": "mongodb-for-testing",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "This is a library which instantiates an inmemory instance",
-  "main": "automation.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node ./index.ts"
+    "start": "ts-node ./index.ts",
+    "build": "tsc"
   },
   "keywords": [
     "test",
