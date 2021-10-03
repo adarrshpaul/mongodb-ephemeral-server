@@ -28,7 +28,7 @@ class mongoInstance {
 
         this.mongoProcess.on('close', function (code: any) {
             if(code !== 0){
-                throw new TypeError('Refer the log file for more info !')
+                throw new TypeError('Refer the log file for more info !' + code)
             }
         });
     }
