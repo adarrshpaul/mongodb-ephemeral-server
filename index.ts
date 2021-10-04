@@ -3,6 +3,7 @@ import * as process from "child_process";
 import os from 'os';
 
 class mongoInstance {
+    private mongoProcess: any;
     public port: number;
     public logPath: string;
     public dbPath: string;
@@ -15,8 +16,6 @@ class mongoInstance {
         this.dbPath = dbPath;
         this.mongodExeLocation = mongodExeLocation;
     };
-
-    private mongoProcess: any;
 
     public start(): void {
         let engine = 'ephemeralForTest';
