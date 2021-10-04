@@ -1,20 +1,30 @@
 import * as process from "child_process";
-class mongoInstance  {
+
+import os from 'os';
+
+class mongoInstance {
     public port: number;
     public logPath: string;
     public dbPath: string;
+    /**For windows only */
+    public mongodExeLocation: string | undefined;
 
-    public constructor(port:number, logPath: string, dbPath: string) {
+    public constructor(port: number, logPath: string, dbPath: string, mongodExeLocation?: string) {
         this.port = port;
         this.logPath = logPath;
         this.dbPath = dbPath;
+        this.mongodExeLocation = mongodExeLocation;
     };
 
     private mongoProcess: any;
 
     public start(): void {
         let engine = 'ephemeralForTest';
-        this.mongoProcess = process.spawn('mongod', [`--port=${this.port}`, `--dbpath=${this.dbPath}`, `--logpath=${this.logPath}`, '--nojournal', `--storageEngine=${engine}`, `--quiet`]);
+        if (os.platform() === 'win32') {
+            this.mongoProcess = process.spawn('mongod', [`--port=${this.port}`, `--dbpath=${this.dbPath}`, `--logpath=${this.logPath}`, '--nojournal', `--storageEngine=${engine}`, `--quiet`], { cwd: this.mongodExeLocation });
+        } else {
+            this.mongoProcess = process.spawn('mongod', [`--port=${this.port}`, `--dbpath=${this.dbPath}`, `--logpath=${this.logPath}`, '--nojournal', `--storageEngine=${engine}`, `--quiet`]);
+        }
 
         this.mongoProcess.on('error', function (err: any) {
             console.log('err: ', err);
@@ -28,7 +38,7 @@ class mongoInstance  {
         });
     }
 
-    public debug():void {
+    public debug(): void {
         this.mongoProcess.stdout.on('data', function (data: any) {
             console.log('stdout: ' + data);
         });
@@ -45,7 +55,7 @@ class mongoInstance  {
         });
     }
 
-    public stop():void {
+    public stop(): void {
         this.mongoProcess.kill('SIGINT');
     }
 

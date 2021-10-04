@@ -1,6 +1,6 @@
 {
   "name": "mongodb-for-testing",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "This is a library which instantiates an inmemory instance",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
