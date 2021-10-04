@@ -18,33 +18,39 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var process = __importStar(require("child_process"));
+var os_1 = __importDefault(require("os"));
 var mongoInstance = /** @class */ (function () {
-    /***Private constructor so that no one can create an instance directly */
-    function mongoInstance() {
+    function mongoInstance(port, logPath, dbPath, mongodExeLocation) {
+        this.port = port;
+        this.logPath = logPath;
+        this.dbPath = dbPath;
+        this.mongodExeLocation = mongodExeLocation;
     }
     ;
-    mongoInstance.getInstance = function () {
-        if (!mongoInstance.instance) {
-            mongoInstance.instance = new mongoInstance();
-        }
-        return mongoInstance.instance;
-    };
-    mongoInstance.start = function () {
+    mongoInstance.prototype.start = function () {
         var engine = 'ephemeralForTest';
-        this.mongoProcess = process.spawn('mongod', ["--port=" + this.port, "--dbpath=" + this.dbPath, "--logpath=" + this.logPath, '--nojournal', "--storageEngine=" + engine, "--quiet"]);
+        if (os_1.default.platform() === 'win32') {
+            this.mongoProcess = process.spawn('mongod', ["--port=" + this.port, "--dbpath=" + this.dbPath, "--logpath=" + this.logPath, '--nojournal', "--storageEngine=" + engine, "--quiet"], { cwd: this.mongodExeLocation });
+        }
+        else {
+            this.mongoProcess = process.spawn('mongod', ["--port=" + this.port, "--dbpath=" + this.dbPath, "--logpath=" + this.logPath, '--nojournal', "--storageEngine=" + engine, "--quiet"]);
+        }
         this.mongoProcess.on('error', function (err) {
             console.log('err: ', err);
             throw new TypeError(err);
         });
         this.mongoProcess.on('close', function (code) {
             if (code !== 0) {
-                throw new TypeError('Refer the log file for more info !');
+                throw new TypeError('Refer the log file for more info !' + code);
             }
         });
     };
-    mongoInstance.debug = function () {
+    mongoInstance.prototype.debug = function () {
         this.mongoProcess.stdout.on('data', function (data) {
             console.log('stdout: ' + data);
         });
@@ -58,18 +64,15 @@ var mongoInstance = /** @class */ (function () {
             console.log('the testing-mongo exited with code ' + code);
         });
     };
-    mongoInstance.end = function () {
+    mongoInstance.prototype.stop = function () {
         this.mongoProcess.kill('SIGINT');
     };
-    mongoInstance.getDbUri = function () {
-        var url = "mongodb://localhost:" + this.port + "/";
+    mongoInstance.prototype.getDbUri = function (dbName) {
+        var url = "mongodb://localhost:" + this.port + "/" + dbName;
         return url;
     };
-    mongoInstance.port = 27022;
-    mongoInstance.logPath = '/home/adarrsh/databases/mongodb/log/mongod.log';
-    mongoInstance.dbPath = '/home/adarrsh/databases/mongodb/data';
     return mongoInstance;
 }());
-var dbUrl = mongoInstance.getDbUri();
-console.log(dbUrl);
-exports.default = mongoInstance;
+module.exports = {
+    mongoInstance: mongoInstance
+};
