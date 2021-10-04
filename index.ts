@@ -64,8 +64,7 @@ class mongoInstance {
     }
 }
 
-module.exports = {
-    mongoInstance
-}
+
+export { mongoInstance }
 
 
