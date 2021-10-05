@@ -12,10 +12,10 @@
   "keywords": [
     "test",
     "mongodb",
-    "ephmeral",
+    "ephemeral",
     "unit-test",
     "server",
-    "ephmeralForTest",
+    "ephemeralForTest",
     "mongodb-for-test"
   ],
   "author": "adarrsh_paul",
