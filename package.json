@@ -1,6 +1,6 @@
 {
-  "name": "mongodb-for-testing",
-  "version": "1.0.20",
+  "name": "mongodb-ephemeral-server",
+  "version": "1.0.1",
   "description": "This is a library which instantiates an inmemory instance",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,7 +11,12 @@
   },
   "keywords": [
     "test",
-    "mongodb"
+    "mongodb",
+    "ephmeral",
+    "unit-test",
+    "server",
+    "ephmeralForTest",
+    "mongodb-for-test"
   ],
   "author": "adarrsh_paul",
   "license": "MIT",
