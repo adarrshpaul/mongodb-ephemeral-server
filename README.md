@@ -137,7 +137,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Adarrsh Paul - [@AdarrshPaul](https://twitter.com/AdarrshPaul)
+Adarrsh Paul - [@AdarrshPaul](https://twitter.com/adarrsh_dev)
 
 Project Link: [https://github.com/adarrshpaul/mongodb-ephemeral-server](https://github.com/adarrshpaul/mongodb-ephemeral-server)
 
