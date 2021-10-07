@@ -46,7 +46,7 @@ var mongoInstance = /** @class */ (function () {
             throw new TypeError(err);
         });
         this.mongoProcess.on('close', function (code) {
-            if (code !== 0) {
+            if (!(code === null || code === 0)) {
                 throw new TypeError('Refer the log file for more info !' + code);
             }
         });
@@ -66,7 +66,7 @@ var mongoInstance = /** @class */ (function () {
         });
     };
     mongoInstance.prototype.stop = function () {
-        this.mongoProcess.kill('SIGINT');
+        this.mongoProcess.kill('SIGKILL');
     };
     mongoInstance.prototype.getDbUri = function (dbName) {
         var url = "mongodb://localhost:" + this.port + "/" + dbName;

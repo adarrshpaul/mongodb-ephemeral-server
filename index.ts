@@ -31,7 +31,7 @@ class mongoInstance {
         });
 
         this.mongoProcess.on('close', function (code: any) {
-            if (code !== 0) {
+            if (!(code === null || code === 0)) {
                 throw new TypeError('Refer the log file for more info !' + code)
             }
         });
@@ -55,7 +55,7 @@ class mongoInstance {
     }
 
     public stop(): void {
-        this.mongoProcess.kill('SIGINT');
+        this.mongoProcess.kill('SIGKILL');
     }
 
     public getDbUri(dbName: string): string {
