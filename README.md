@@ -98,13 +98,44 @@ To run this, please make sure you have to following things installed.
 Example code to show the usage of the package: 
 
 1. Import the package in your code:
-    ```sh
+    ```javascript
     const mongodbEphemeralServer = require("mongodb-ephemeral-server")
     ```
 
 2. Provide the database configurations:
-    
-_For more examples, please refer to the [sample project](coming_soon)_
+    ```javascript
+    const PORT = 27025; // Or anything you wish.
+    const dbPath = '/home/user/mongodb-ephemeral/data'; // Path to your database
+    const logPath = '/home/user/mongodb-ephemeral/log'; // Path to your database logs
+    const dbName = 'sample_db_name';
+    ```
+3. Connect to the ephemeral instance:
+    ```javascript
+    const ephemeralInstance = new mongodbEphemeralServer(port, logpath, dbpath, mongodExeLocation);
+    ```
+4. Start the mongodb-ephemeral-server:
+    ```javascript
+    ephemeralInstance.start();
+    const dbUri = ephemeralInstance.getDbUri(dbName);
+    ```
+5. Connect to the database:
+    ```javascript
+    // Connect to the Database using the uri obtained.
+    // If using the mongoose ODM use the below code:
+    const { mongoose } = require('mongoose');
+    await mongoose.connect(dbUri, {});
+    ```
+6. Close the database connection: (Optional)
+    ```javascript
+    // If using the mongoose ODM
+    await mongoose.connection.close();
+    ```
+7. Terminate the mongodb-ephemeral-server:
+    ```javascript
+    ephemeralInstance.stop();
+    ```
+
+_For more examples, please refer to the [sample project](https://github.com/adarrshpaul/mongodb-ephemeral-server)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
