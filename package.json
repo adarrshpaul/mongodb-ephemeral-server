@@ -1,6 +1,6 @@
 {
   "name": "mongodb-ephemeral-server",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "This is a library which instantiates an inmemory instance",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,6 +21,8 @@
   "author": "adarrsh_paul",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^16.11.0",
+    "ts-node": "^10.3.0",
     "tslint": "^5.12.1",
     "typescript": "^3.3.3"
   },
@@ -28,7 +30,5 @@
     "type": "git",
     "url": "https://github.com/adarrshpaul/mongodb-ephemeral-server"
   },
-  "dependencies": {
-    "ts-node": "^10.2.1"
-  }
+  "dependencies": {}
 }
