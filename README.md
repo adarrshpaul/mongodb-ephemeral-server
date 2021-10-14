@@ -91,7 +91,6 @@ To run this, please make sure you have to following things installed.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
 <!-- USAGE EXAMPLES -->
 ## Usage
 
@@ -108,8 +107,15 @@ Example code to show the usage of the package:
     const dbPath = '/home/user/mongodb-ephemeral/data'; // Path to your database
     const logPath = '/home/user/mongodb-ephemeral/log'; // Path to your database logs
     const dbName = 'sample_db_name';
+    /**
+     * In case you want to run test on windows - add the mongodExeLocation
+     * Note adding this on linux won't have any effect
+     * So, if you have written test on window machine
+     * You need not to worry when running on a linux machine
+     */
+    const mongodExeLocation = 'C:/Program Files/MongoDB/Server/4.2/bin'
     ```
-3. Connect to the ephemeral instance:
+3. Create the ephemeral instance:
     ```javascript
     const ephemeralInstance = new mongodbEphemeralServer(port, logpath, dbpath, mongodExeLocation);
     ```
@@ -155,15 +161,12 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 <!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 <!-- CONTACT -->
 ## Contact
