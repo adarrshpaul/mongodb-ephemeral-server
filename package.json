@@ -1,34 +1,38 @@
 {
-  "name": "mongodb-ephemeral-server",
-  "version": "1.0.7",
-  "description": "This is a library which instantiates an inmemory instance",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node ./index.ts",
-    "build": "tsc"
-  },
-  "keywords": [
-    "test",
-    "mongodb",
-    "ephemeral",
-    "unit-test",
-    "server",
-    "ephemeralForTest",
-    "mongodb-for-test"
-  ],
-  "author": "adarrsh_paul",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^16.11.0",
-    "ts-node": "^10.3.0",
-    "tslint": "^5.12.1",
-    "typescript": "^3.3.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/adarrshpaul/mongodb-ephemeral-server"
-  },
-  "dependencies": {}
+	"name": "mongodb-ephemeral-server",
+	"version": "1.0.7",
+	"description": "This is a library which instantiates an inmemory instance",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"lint": "biome check --write",
+		"test": "vitest run",
+		"start": "ts-node ./index.ts",
+		"build": "tsc"
+	},
+	"keywords": [
+		"test",
+		"mongodb",
+		"ephemeral",
+		"unit-test",
+		"server",
+		"ephemeralForTest",
+		"mongodb-for-test"
+	],
+	"author": "adarrsh_paul",
+	"license": "MIT",
+	"devDependencies": {
+		"@biomejs/biome": "~1.9.4",
+		"@types/node": "^22.13.14",
+		"ts-node": "^10.9.2",
+		"tslint": "^5.12.1",
+		"typescript": "^5.8.2",
+		"@vitest/coverage-v8": "^3.0.9",
+		"vitest": "^3.0.9"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/adarrshpaul/mongodb-ephemeral-server"
+	},
+	"dependencies": {}
 }
