@@ -1,6 +1,6 @@
 {
 	"name": "mongodb-ephemeral-server",
-	"version": "1.0.7",
+	"version": "1.1.0",
 	"description": "This is a library which instantiates an inmemory instance",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
